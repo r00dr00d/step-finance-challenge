@@ -13,6 +13,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
+      mono: ['Space mono', 'monospace'],
       sans: ['Plus Jakarta Sans', 'sans-serif'],
     }
   },
