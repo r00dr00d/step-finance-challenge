@@ -28,8 +28,8 @@ export function useStepStakingBalance() {
       ]);
 
       return {
-        step: tokenAccounts.value.find(acc => acc.account.data.parsed.info.mint === STEP_STAKING_TOKEN_MINT),//?.account?.data?.parsed?.info?.tokenAmount ?? { amount: "0", decimals: 0, uiAmount: 0, uiAmountString: "0" },
-        xStep: tokenAccounts.value.find(acc => acc.account.data.parsed.info.mint === STEP_STAKING_XTOKEN_MINT)//?.account?.data?.parsed?.info?.tokenAmount ?? { amount: "0", decimals: 0, uiAmount: 0, uiAmountString: "0" },
+        step: tokenAccounts.value.find(acc => acc.account.data.parsed.info.mint === STEP_STAKING_TOKEN_MINT.toString())?.account?.data?.parsed?.info?.tokenAmount ?? { amount: "0", decimals: 0, uiAmount: 0, uiAmountString: "0" },
+        xStep: tokenAccounts.value.find(acc => acc.account.data.parsed.info.mint === STEP_STAKING_XTOKEN_MINT.toString())?.account?.data?.parsed?.info?.tokenAmount ?? { amount: "0", decimals: 0, uiAmount: 0, uiAmountString: "0" },
       }
     },
   });
@@ -115,39 +115,4 @@ export function useStepUnstakeOperation() {
       })
     },
   })
-}
-
-export function useStepPricing() {
-  const provider = useAnchorProvider()
-  const program = getStepStakingProgram(provider)
-
-  const [vaultPubkey] =
-    PublicKey.findProgramAddressSync(
-      [new PublicKey(STEP_STAKING_TOKEN_MINT).toBuffer()],
-      program.programId
-  )
-
-  program.simulate.emitPrice({
-    accounts: {
-      tokenMint: STEP_STAKING_TOKEN_MINT,
-      xTokenMint: STEP_STAKING_XTOKEN_MINT,
-      tokenVault: vaultPubkey,
-    }
-  }).then(console.log)
-
-  // return useEffect(() => {
-  //   console.log('called (init)....')
-    
-  //   const listener = program.addEventListener('Price', (e, s) => {
-  //     console.log('Price Change In Slot ', s);
-  //     console.log('From', e.oldStepPerXstepE9.toString());
-  //     console.log('From', e.oldStepPerXstep.toString());
-  //     console.log('To', e.newStepPerXstepE9.toString());
-  //     console.log('To', e.newStepPerXstep.toString());
-  //   })
-
-  //   return () => {
-  //     program.removeEventListener(listener)
-  //   }
-  // }, [program])
 }
