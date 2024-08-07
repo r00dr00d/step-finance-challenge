@@ -7,7 +7,6 @@ import { ReactNode, Suspense, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { AccountChecker } from '../account/account-ui';
 import {
   ClusterChecker,
   ClusterUiSelect,
@@ -49,9 +48,6 @@ export function UiLayout({
           <ClusterUiSelect />
         </div>
       </div>
-      <ClusterChecker>
-        <AccountChecker />
-      </ClusterChecker>
       <div className="flex-grow mx-4 lg:mx-auto">
         <Suspense
           fallback={

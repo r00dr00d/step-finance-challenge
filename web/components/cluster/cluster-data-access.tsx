@@ -35,6 +35,11 @@ export const defaultClusters: Cluster[] = [
     endpoint: clusterApiUrl('testnet'),
     network: ClusterNetwork.Testnet,
   },
+  {
+    name: 'mainnet',
+    network: ClusterNetwork.Mainnet,
+    endpoint: `https://solana-mainnet.api.syndica.io/api-key/nQxxSgzqXPB71Ljou7tvonidoexUQCgbRMKxxRmaQ7puS57sxK17crtugiR9bYTQYTNaUrsQHPC9w1U8PtU2MxaDsAY5g2M99A`,
+  },
 ];
 
 const clusterAtom = atomWithStorage<Cluster>(
@@ -112,7 +117,7 @@ function getClusterUrlParam(cluster: Cluster): string {
       suffix = 'devnet';
       break;
     case ClusterNetwork.Mainnet:
-      suffix = '';
+      suffix = 'mainnet';
       break;
     case ClusterNetwork.Testnet:
       suffix = 'testnet';
