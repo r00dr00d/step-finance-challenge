@@ -1,11 +1,11 @@
+import { useEffect } from "react";
+import { BN } from "@coral-xyz/anchor";
+import { PublicKey } from "@solana/web3.js";
+import { useAnchorProvider } from "../solana/solana-provider";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID, getAssociatedTokenAddress } from "@solana/spl-token";
 import { getStepStakingProgram, STEP_STAKING_TOKEN_MINT, STEP_STAKING_XTOKEN_MINT } from "./step-staking-exports";
-import { useAnchorProvider } from "../solana/solana-provider";
-import { BN } from "@coral-xyz/anchor";
-import { PublicKey } from "@solana/web3.js";
-
 
 export function useStepStakingBalance() {
   const wallet = useWallet();
@@ -115,4 +115,39 @@ export function useStepUnstakeOperation() {
       })
     },
   })
+}
+
+export function useStepPricing() {
+  const provider = useAnchorProvider()
+  const program = getStepStakingProgram(provider)
+
+  const [vaultPubkey] =
+    PublicKey.findProgramAddressSync(
+      [new PublicKey(STEP_STAKING_TOKEN_MINT).toBuffer()],
+      program.programId
+  )
+
+  program.simulate.emitPrice({
+    accounts: {
+      tokenMint: STEP_STAKING_TOKEN_MINT,
+      xTokenMint: STEP_STAKING_XTOKEN_MINT,
+      tokenVault: vaultPubkey,
+    }
+  }).then(console.log)
+
+  // return useEffect(() => {
+  //   console.log('called (init)....')
+    
+  //   const listener = program.addEventListener('Price', (e, s) => {
+  //     console.log('Price Change In Slot ', s);
+  //     console.log('From', e.oldStepPerXstepE9.toString());
+  //     console.log('From', e.oldStepPerXstep.toString());
+  //     console.log('To', e.newStepPerXstepE9.toString());
+  //     console.log('To', e.newStepPerXstep.toString());
+  //   })
+
+  //   return () => {
+  //     program.removeEventListener(listener)
+  //   }
+  // }, [program])
 }

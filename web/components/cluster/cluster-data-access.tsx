@@ -25,17 +25,6 @@ export enum ClusterNetwork {
 // To use the mainnet-beta cluster, provide a custom endpoint
 export const defaultClusters: Cluster[] = [
   {
-    name: 'devnet',
-    endpoint: clusterApiUrl('devnet'),
-    network: ClusterNetwork.Devnet,
-  },
-  { name: 'local', endpoint: 'http://localhost:8899' },
-  {
-    name: 'testnet',
-    endpoint: clusterApiUrl('testnet'),
-    network: ClusterNetwork.Testnet,
-  },
-  {
     name: 'mainnet',
     network: ClusterNetwork.Mainnet,
     endpoint: `https://solana-mainnet.api.syndica.io/api-key/nQxxSgzqXPB71Ljou7tvonidoexUQCgbRMKxxRmaQ7puS57sxK17crtugiR9bYTQYTNaUrsQHPC9w1U8PtU2MxaDsAY5g2M99A`,

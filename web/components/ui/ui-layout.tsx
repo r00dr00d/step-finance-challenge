@@ -6,10 +6,6 @@ import { ReactNode, Suspense, useEffect, useRef } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-import {
-  ClusterUiSelect,
-} from '../cluster/cluster-ui';
 import toast, { Toaster } from 'react-hot-toast';
 
 export function UiLayout({
@@ -43,7 +39,7 @@ export function UiLayout({
         </div>
         <div className="flex-none space-x-2">
           <WalletButton />
-          <ClusterUiSelect />
+          {/* <ClusterUiSelect /> */}
         </div>
       </div>
       <div className="flex-grow mx-4 lg:mx-auto">

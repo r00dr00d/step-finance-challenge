@@ -1,10 +1,11 @@
 'use client';
 import { PublicKey } from "@solana/web3.js";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { useStepStakeOperation, useStepStakingBalance, useStepUnstakeOperation } from "./step-staking-data-access";
+import { useStepPricing, useStepStakeOperation, useStepStakingBalance, useStepUnstakeOperation } from "./step-staking-data-access";
 
 export function StepStakingComponent() {
   const accounts = useStepStakingBalance()
+  useStepPricing()
   const { mutateAsync: stake } = useStepStakeOperation()
   const { mutateAsync: unstake } = useStepUnstakeOperation()
   
