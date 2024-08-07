@@ -7,9 +7,6 @@ export function StepStakingComponent() {
   const accounts = useStepStakingBalance()
   const { mutateAsync: stake } = useStepStakeOperation()
   const { mutateAsync: unstake } = useStepUnstakeOperation()
-
-  console.log(accounts.data)
-
   
   return <div>
     <button onClick={() => stake(2000000000).then(console.log).catch(console.error)}>Stake!</button>

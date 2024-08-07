@@ -27,8 +27,6 @@ export function useStepStakingBalance() {
         }),
       ]);
 
-      console.log(tokenAccounts)
-
       return {
         step: tokenAccounts.value.find(acc => acc.account.data.parsed.info.mint === STEP_STAKING_TOKEN_MINT),//?.account?.data?.parsed?.info?.tokenAmount ?? { amount: "0", decimals: 0, uiAmount: 0, uiAmountString: "0" },
         xStep: tokenAccounts.value.find(acc => acc.account.data.parsed.info.mint === STEP_STAKING_XTOKEN_MINT)//?.account?.data?.parsed?.info?.tokenAmount ?? { amount: "0", decimals: 0, uiAmount: 0, uiAmountString: "0" },
