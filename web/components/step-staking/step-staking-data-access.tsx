@@ -5,7 +5,7 @@ import { useAnchorProvider } from "../solana/solana-provider";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID, getAssociatedTokenAddress } from "@solana/spl-token";
-import { getStepStakingProgram, STEP_STAKING_TOKEN_MINT, STEP_STAKING_XTOKEN_MINT } from "./step-staking-exports";
+import { useStepStakingProgram, STEP_STAKING_TOKEN_MINT, STEP_STAKING_XTOKEN_MINT } from "./step-staking-exports";
 
 export function useStepStakingBalance() {
   const wallet = useWallet();
@@ -37,7 +37,7 @@ export function useStepStakingBalance() {
 
 export function useStepStakeOperation() {
   const provider = useAnchorProvider()
-  const program = getStepStakingProgram(provider)
+  const program = useStepStakingProgram(provider)
 
   return useMutation({
     mutationKey: [
@@ -78,7 +78,7 @@ export function useStepStakeOperation() {
 
 export function useStepUnstakeOperation() {
   const provider = useAnchorProvider()
-  const program = getStepStakingProgram(provider)
+  const program = useStepStakingProgram(provider)
 
   return useMutation({
     mutationKey: [
@@ -115,4 +115,45 @@ export function useStepUnstakeOperation() {
       })
     },
   })
+}
+
+
+export function useStepPrice() {
+  const provider = useAnchorProvider()
+  const program = useStepStakingProgram(provider)
+
+  const [vaultPubkey] =
+    PublicKey.findProgramAddressSync(
+      [new PublicKey(STEP_STAKING_TOKEN_MINT).toBuffer()],
+      program.programId
+  )
+
+  const query = useQuery({
+    queryKey: ['step-finance', 'emit-price'],
+    queryFn: async () => {
+      const price = await program.simulate.emitPrice({
+        accounts: {
+          tokenMint: STEP_STAKING_TOKEN_MINT,
+          xTokenMint: STEP_STAKING_XTOKEN_MINT,
+          tokenVault: vaultPubkey,
+        }
+      })
+
+      return price?.events?.[0]?.data?.stepPerXstep ? Number(price.events[0].data.stepPerXstep) : 0;
+    },
+  });
+
+  useEffect(() => {
+    const listener = program.addEventListener('PriceChange', () => {
+      query.refetch()
+    })
+
+    return () => {
+      program.removeEventListener(listener)
+    }
+  }, [query, program])
+
+  return query;
+
+  
 }
