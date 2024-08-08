@@ -7,9 +7,13 @@ import {
   useStepUnstakeOperation,
 } from './step-staking-data-access';
 import { TabHeadingButton } from '../ui/tabs';
-import { StakeIcon, UnstakeIcon } from '../ui/icons';
+import { UI_AMOUNT_TO_AMOUNT_QTY } from '@/utils';
 import { StakeComponent } from './StakeComponent';
+import { StakeIcon, UnstakeIcon } from '../ui/icons';
 import { UnstakeComponent } from './UnstakeComponent';
+
+
+
 
 export function StepStakingComponent() {
   const price = useStepPrice();
@@ -32,17 +36,14 @@ export function StepStakingComponent() {
           {operation === 'stake' ? <StakeComponent price={price?.data ?? 0} stepUiBalance={balance?.data?.step?.uiAmount} xStepUiBalance={balance?.data?.xStep?.uiAmount} input={input} onInputUpdate={setInput} /> : <UnstakeComponent price={price?.data ?? 0} stepUiBalance={balance?.data?.step?.uiAmount} xStepUiBalance={balance?.data?.xStep?.uiAmount} input={input} onInputUpdate={setInput} />}
         </div>
       </div>
-{/* 
-      <button className={`${buttonStyles} ${stake && stake > 0 ? activeButtonStyles : inactiveButtonStyles}`}>
-        {activeTab === 'stake'
-          ? stake && stake > 0
-            ? 'Stake'
-            : 'Enter an amount'
-          : stake && stake > 0
-          ? 'Unstake'
-          : 'Enter an amount'
-        }
-      </button> */}
+
+      <button
+        disabled={input.qty <= 0}
+        className="w-[450px] h-[60px] font-extrabold transition-colors duration-300 rounded-md text-[#06d6a0] bg-[#003628] hover:text-black hover:bg-[#06d6a0] disabled:bg-[#434343] disabled:text-[#b2b2b2] disabled:cursor-not-allowed"
+        onClick={() => operation === 'stake' ? stake(input.qty * UI_AMOUNT_TO_AMOUNT_QTY) : unstake(input.qty * UI_AMOUNT_TO_AMOUNT_QTY)}
+      >
+        {input.qty > 0 ? operation : 'Enter an amount'}
+      </button>
     </div>
   )
 }

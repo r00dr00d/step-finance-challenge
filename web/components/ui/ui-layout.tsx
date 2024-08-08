@@ -52,7 +52,7 @@ export function UiLayout({
         >
           {children}
         </Suspense>
-        <Toaster position="bottom-right" />
+        <Toaster position="bottom-left" />
       </div>
     </div>
   );

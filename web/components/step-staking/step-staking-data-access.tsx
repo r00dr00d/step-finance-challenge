@@ -6,6 +6,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { TOKEN_PROGRAM_ID, getAssociatedTokenAddress } from "@solana/spl-token";
 import { useStepStakingProgram, STEP_STAKING_TOKEN_MINT, STEP_STAKING_XTOKEN_MINT } from "./step-staking-exports";
+import toast from "react-hot-toast";
 
 export function useStepStakingBalance() {
   const wallet = useWallet();
@@ -68,6 +69,12 @@ export function useStepStakeOperation() {
         }
       })
     },
+    onSuccess() {
+      toast.success('Stake operation successful')
+    },
+    onError(error) {
+      toast.error(error.message)
+    }
   })
 }
 
@@ -109,6 +116,12 @@ export function useStepUnstakeOperation() {
         }
       })
     },
+    onSuccess() {
+      toast.success('Unstake operation successful')
+    },
+    onError(error) {
+      toast.error(error.message)
+    }
   })
 }
 

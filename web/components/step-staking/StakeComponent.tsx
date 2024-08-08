@@ -26,7 +26,7 @@ export const StakeComponent = ({ price, stepUiBalance, xStepUiBalance, input, on
         <Image src="/step.png" alt="STEP" width={32} height={32} />
           <span>STEP</span>
         </div>
-        <div className='flex flex-col items-end'>
+        <div className='flex flex-col justify-center items-end h-[2.5rem]'>
           <input placeholder='0.00' className='placeholder-gray-400 font-mono text-base text-[white] text-right appearance: none; border-none bg-transparent outline-none ' type="text" value={input.type === 'step' ? input.qty : xStepToStep(input.qty, price)} onChange={e => onInputUpdate({ type: 'step', qty: Number(e.target.value) })} />
           {input.qty > 0 ? <span className='text-xs text-[#7d7d7d]'>$3.83</span> : null}
         </div>
@@ -45,7 +45,7 @@ export const StakeComponent = ({ price, stepUiBalance, xStepUiBalance, input, on
         <Image src="/xstep.svg" alt="xSTEP" width={32} height={32} />
           <span>xSTEP</span>
         </div>
-        <div className='flex flex-col items-end'>
+        <div className='flex flex-col justify-center items-end h-[2.5rem]'>
           <input placeholder='0.00' className='placeholder-gray-40 font-mono text-base text-[white] text-right appearance: none; border-none bg-transparent outline-none' type="text" value={input.type === 'xstep' ? input.qty : stepToXStep(input.qty, price)} onChange={e => onInputUpdate({ type: 'xstep', qty: Number(e.target.value) })} />
           {input.qty ? <span className='text-xs text-[#7d7d7d]'>$3.83</span> : null}
         </div>
