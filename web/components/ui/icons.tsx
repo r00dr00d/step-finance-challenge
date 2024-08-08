@@ -1,7 +1,7 @@
 import * as React from "react"
 
 
-export const StakeIcon = (props) => (
+export const StakeIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={14}
@@ -18,7 +18,7 @@ export const StakeIcon = (props) => (
   </svg>
 )
 
-export const UnstakeIcon = (props) => (
+export const UnstakeIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={14}
@@ -35,7 +35,7 @@ export const UnstakeIcon = (props) => (
   </svg>
 )
 
-export const ArrowDownIcon = (props) => (
+export const ArrowDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={28}

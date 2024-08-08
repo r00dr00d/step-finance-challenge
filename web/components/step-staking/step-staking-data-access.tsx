@@ -4,7 +4,7 @@ import { PublicKey } from "@solana/web3.js";
 import { useAnchorProvider } from "../solana/solana-provider";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID, getAssociatedTokenAddress } from "@solana/spl-token";
+import { TOKEN_PROGRAM_ID, getAssociatedTokenAddress } from "@solana/spl-token";
 import { useStepStakingProgram, STEP_STAKING_TOKEN_MINT, STEP_STAKING_XTOKEN_MINT } from "./step-staking-exports";
 
 export function useStepStakingBalance() {
@@ -18,14 +18,9 @@ export function useStepStakingBalance() {
       { endpoint: connection.rpcEndpoint, address: wallet.publicKey },
     ],
     queryFn: async () => {
-      const [tokenAccounts, token2022Accounts] = await Promise.all([
-        connection.getParsedTokenAccountsByOwner(wallet.publicKey!, {
-          programId: TOKEN_PROGRAM_ID,
-        }),
-        connection.getParsedTokenAccountsByOwner(wallet.publicKey!, {
-          programId: TOKEN_2022_PROGRAM_ID,
-        }),
-      ]);
+      const tokenAccounts = await connection.getParsedTokenAccountsByOwner(wallet.publicKey!, {
+        programId: TOKEN_PROGRAM_ID,
+      });
 
       return {
         step: tokenAccounts.value.find(acc => acc.account.data.parsed.info.mint === STEP_STAKING_TOKEN_MINT.toString())?.account?.data?.parsed?.info?.tokenAmount ?? { amount: "0", decimals: 0, uiAmount: 0, uiAmountString: "0" },

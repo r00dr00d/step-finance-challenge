@@ -3,18 +3,6 @@ import Image from 'next/image';
 import { twMerge } from 'tailwind-merge'
 import { ArrowDownIcon, StakeIcon, UnstakeIcon } from "../ui/icons";
 
-const TabHeadingButton = ({ icon = null, active = false, text, onClick }) => (
-  <div onClick={onClick} className={
-    twMerge(
-      'cursor-pointer font-extrabold flex items-center gap-4 transition-colors duration-300 bg-[#0a0a0a] text-[#787878] hover:text-[#06d6a0] px-8 py-4 rounded-t-md',
-      active && 'bg-[#141414] text-[#00f8b7]'
-    )
-  }>
-    {icon}
-    <span>{text}</span>
-  </div>
-)
-
 const buttonStyles = 'w-[450px] h-[60px] font-extrabold transition-colors duration-300 rounded-md';
 const activeButtonStyles = 'text-[#06d6a0] bg-[#003628] hover:text-black hover:bg-[#06d6a0]';
 const inactiveButtonStyles = 'bg-[#434343] text-[#b2b2b2] cursor-not-allowed';

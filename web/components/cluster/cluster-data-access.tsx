@@ -1,6 +1,6 @@
 'use client';
 
-import { clusterApiUrl, Connection } from '@solana/web3.js';
+import { Connection } from '@solana/web3.js';
 import { atom, useAtomValue, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { createContext, ReactNode, useContext } from 'react';
@@ -27,7 +27,7 @@ export const defaultClusters: Cluster[] = [
   {
     name: 'mainnet',
     network: ClusterNetwork.Mainnet,
-    endpoint: `https://solana-mainnet.api.syndica.io/api-key/nQxxSgzqXPB71Ljou7tvonidoexUQCgbRMKxxRmaQ7puS57sxK17crtugiR9bYTQYTNaUrsQHPC9w1U8PtU2MxaDsAY5g2M99A`,
+    endpoint: `https://solana-mainnet.api.syndica.io/api-key/2fnBFYFrNEadPNEFFQTuJnJcwQcPm91BxBUVbE3HRcsRQSuCv2q1asGJFfFwkhyRRqqJ9zVuTxsDzUeXqHidY3bX9SfJzFYyVq5`,
   },
 ];
 
