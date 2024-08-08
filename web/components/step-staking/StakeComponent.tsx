@@ -6,11 +6,18 @@ type StakeComponentProps = {
   price: number;
   stepUiBalance: number;
   xStepUiBalance: number;
+  marketPrices: { step: number, xStep: number };
   input: { type: 'step' | 'xstep', qty: number },
   onInputUpdate: (input: { type: 'step' | 'xstep', qty: number }) => void;
 };
 
-export const StakeComponent = ({ price, stepUiBalance, xStepUiBalance, input, onInputUpdate }: StakeComponentProps) => {
+export const StakeComponent = ({ price, marketPrices, stepUiBalance, xStepUiBalance, input, onInputUpdate }: StakeComponentProps) => {
+  const step = input.type === 'step' ? input.qty : xStepToStep(input.qty, price);
+  const xStep = input.type === 'xstep' ? input.qty : stepToXStep(input.qty, price);
+
+  const stepUsd = Math.floor((step * marketPrices.step) * 100) / 100;
+  const xStepUsd = Math.floor((xStep * marketPrices.xStep) * 100) / 100;
+
   return (
     <>
       <div className="flex justify-between items-center text-sm">
@@ -27,8 +34,8 @@ export const StakeComponent = ({ price, stepUiBalance, xStepUiBalance, input, on
           <span>STEP</span>
         </div>
         <div className='flex flex-col justify-center items-end h-[2.5rem]'>
-          <input placeholder='0.00' className='placeholder-gray-400 font-mono text-base text-[white] text-right appearance: none; border-none bg-transparent outline-none ' type="text" value={input.type === 'step' ? input.qty : xStepToStep(input.qty, price)} onChange={e => onInputUpdate({ type: 'step', qty: Number(e.target.value) })} />
-          {input.qty > 0 ? <span className='text-xs text-[#7d7d7d]'>$3.83</span> : null}
+          <input placeholder='0.00' className='placeholder-gray-400 font-mono text-base text-[white] text-right appearance: none; border-none bg-transparent outline-none ' type="text" value={step} onChange={e => onInputUpdate({ type: 'step', qty: Number(e.target.value) })} />
+          {input.qty > 0 ? <span className='text-xs text-[#7d7d7d]'>${stepUsd}</span> : null}
         </div>
       </div>
       <div className='flex py-4 items-center justify-center'>
@@ -46,8 +53,8 @@ export const StakeComponent = ({ price, stepUiBalance, xStepUiBalance, input, on
           <span>xSTEP</span>
         </div>
         <div className='flex flex-col justify-center items-end h-[2.5rem]'>
-          <input placeholder='0.00' className='placeholder-gray-40 font-mono text-base text-[white] text-right appearance: none; border-none bg-transparent outline-none' type="text" value={input.type === 'xstep' ? input.qty : stepToXStep(input.qty, price)} onChange={e => onInputUpdate({ type: 'xstep', qty: Number(e.target.value) })} />
-          {input.qty ? <span className='text-xs text-[#7d7d7d]'>$3.83</span> : null}
+          <input placeholder='0.00' className='placeholder-gray-40 font-mono text-base text-[white] text-right appearance: none; border-none bg-transparent outline-none' type="text" value={xStep} onChange={e => onInputUpdate({ type: 'xstep', qty: Number(e.target.value) })} />
+          {input.qty ? <span className='text-xs text-[#7d7d7d]'>${xStepUsd}</span> : null}
         </div>
       </div>
       </>
