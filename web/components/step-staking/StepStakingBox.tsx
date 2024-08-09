@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import Image from 'next/image';
 import { twMerge } from 'tailwind-merge'
 import { ArrowDownIcon, StakeIcon, UnstakeIcon } from "../ui/icons";
-
 
 const TabHeadingButton = ({ icon = null, active = false, text, onClick }) => (
   <div onClick={onClick} className={
@@ -15,9 +15,13 @@ const TabHeadingButton = ({ icon = null, active = false, text, onClick }) => (
   </div>
 )
 
+const buttonStyles = 'w-[450px] h-[60px] font-extrabold transition-colors duration-300 rounded-md';
+const activeButtonStyles = 'text-[#06d6a0] bg-[#003628] hover:text-black hover:bg-[#06d6a0]';
+const inactiveButtonStyles = 'bg-[#434343] text-[#b2b2b2] cursor-not-allowed';
+
 export function StepStakingBox() {
   const [activeTab, setActiveTab] = useState<'stake' | 'unstake'>('stake')
-
+  const amount=true
   return (
     <div className='flex flex-col gap-3'>
       <div>
@@ -27,7 +31,7 @@ export function StepStakingBox() {
         </div>
         <div className='flex flex-col gap-2 bg-[#141414] p-4 rounded-b-md rounded-tr-md w-[450px]'>
           <div className="flex justify-between items-center text-sm">
-            <span>You stake</span>
+            <span className="text-[white]">You stake</span>
             <div className='flex gap-2 items-center'>
               <span className="text-[#7d7d7d] font-mono">Balance: 132.00000</span>
               <button className='text-xs p-1 transition-color duration-300 hover:text-black hover:bg-[#06d6a0] text-[#06d6a0] bg-[#003628] rounded-md uppercase'>Half</button>
@@ -36,7 +40,7 @@ export function StepStakingBox() {
           </div>
           <div className='bg-black flex justify-between px-2 py-4 rounded-md'>
             <div className='flex text-white text-sm items-center gap-2'>
-              <img src="/step.png" alt="step" className="w-8 h-8" />
+            <Image src="/step.png" alt="STEP" width={32} height={32} />
               <span>STEP</span>
             </div>
             <div className='flex flex-col items-end'>
@@ -48,14 +52,14 @@ export function StepStakingBox() {
             <ArrowDownIcon className="text-[#ffbb1d]" />
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span>You receive</span>
+            <span className="text-[white]">You receive</span>
             <div className='flex gap-2 items-center'>
               <span className="text-[#7d7d7d] font-mono">Balance: 3.00000</span>
             </div>
           </div>
           <div className='bg-black flex justify-between px-2 py-4 rounded-md'>
             <div className='flex text-white text-sm items-center gap-2'>
-              <img src="/xstep.svg" alt="step" className="w-8 h-8" />
+            <Image src="/xstep.svg" alt="xSTEP" width={32} height={32} />
               <span>xSTEP</span>
             </div>
             <div className='flex flex-col items-end'>
@@ -65,8 +69,9 @@ export function StepStakingBox() {
           </div>
         </div>
       </div>
-      <button className='w-[450px] h-[60px] font-extrabold transition-color duration-300 hover:text-black hover:bg-[#06d6a0] text-[#06d6a0] bg-[#003628] rounded-md'>
-        Stake
+
+      <button className={`${buttonStyles} ${amount ? activeButtonStyles : inactiveButtonStyles}`}>
+        {amount ? 'Stake' : 'Enter an amount'}
       </button>
     </div>
   )
