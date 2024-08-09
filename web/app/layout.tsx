@@ -35,7 +35,7 @@ export default function RootLayout({
         <ReactQueryProvider>
           <ClusterProvider>
             <SolanaProvider>
-                <UiLayout links={[]}>
+                <UiLayout>
                   <WalletLoader>{children}</WalletLoader>
                 </UiLayout>
             </SolanaProvider>

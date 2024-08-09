@@ -27,7 +27,7 @@ export const defaultClusters: Cluster[] = [
   {
     name: 'mainnet',
     network: ClusterNetwork.Mainnet,
-    endpoint: `https://solana-mainnet.api.syndica.io/api-key/2fnBFYFrNEadPNEFFQTuJnJcwQcPm91BxBUVbE3HRcsRQSuCv2q1asGJFfFwkhyRRqqJ9zVuTxsDzUeXqHidY3bX9SfJzFYyVq5`,
+    endpoint: `https://solana-mainnet.api.syndica.io/api-key/2wBwYGXWReYFRsU5Bfbwq4Y4TwTaZXXGBrJBNTM7VFzPSVLDbsN64yA5ve17KNDU2NzDn8JMRxpx3ZRRAD8LhwPtU19ah9qR524`,
   },
 ];
 
