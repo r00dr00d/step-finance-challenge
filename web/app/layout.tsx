@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic';
 import { Plus_Jakarta_Sans, Space_Mono } from 'next/font/google'
 import { UiLayout } from '@/components/ui/ui-layout';
 import { ReactQueryProvider } from './react-query-provider';
-import { SolanaProvider } from '@/components/solana/solana-provider';
-import { ClusterProvider } from '@/components/cluster/cluster-data-access';
+import { SolanaProvider } from '@/services/solana/solana-provider';
+import { ClusterProvider } from '@/services/cluster/cluster-data-access';
 
 export const metadata = {
   title: 'Step Finance | The Front Page of Solana',
@@ -22,7 +22,7 @@ const mono = Space_Mono({
   variable: '--font-space-mono'
 })
 
-const WalletLoader = dynamic(() => import('@/components/solana/wallet-loader'), { ssr: false })
+const WalletLoader = dynamic(() => import('@/services/solana/wallet-loader'), { ssr: false })
 
 export default function RootLayout({
   children,

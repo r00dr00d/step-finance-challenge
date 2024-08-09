@@ -5,13 +5,13 @@ import {
   useStepStakeOperation,
   useStepStakingBalance,
   useStepUnstakeOperation,
-} from './step-staking-data-access';
-import { TabHeadingButton } from '../ui/tabs';
+} from '@/services/step-staking/step-staking-data-access';
+import { TabHeadingButton } from '@/components/ui/tabs';
 import { UI_AMOUNT_TO_AMOUNT_QTY, validateStakeAmount, validateUnstakeAmount } from '@/utils';
 import { StakeComponent } from './StakeComponent';
-import { StakeIcon, UnstakeIcon } from '../ui/icons';
+import { StakeIcon, UnstakeIcon } from '@/components/ui/icons';
 import { UnstakeComponent } from './UnstakeComponent';
-import { useMarketPrices } from './markets';
+import { useMarketPrices } from '@/services/step-staking/markets';
 
 export function StepStaking() {
   const priceReq = useStepPrice();

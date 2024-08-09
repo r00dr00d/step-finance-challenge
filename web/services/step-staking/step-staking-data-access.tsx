@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { BN } from "@coral-xyz/anchor";
 import { PublicKey } from "@solana/web3.js";
-import { useAnchorProvider } from "../solana/solana-provider";
+import { useAnchorProvider } from "@/services/solana/solana-provider";
 import { useSuspenseQuery, useMutation } from "@tanstack/react-query";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { TOKEN_PROGRAM_ID, getAssociatedTokenAddress } from "@solana/spl-token";
