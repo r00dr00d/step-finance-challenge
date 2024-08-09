@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { BN } from "@coral-xyz/anchor";
 import { PublicKey } from "@solana/web3.js";
 import { useAnchorProvider } from "../solana/solana-provider";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useSuspenseQuery, useMutation } from "@tanstack/react-query";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { TOKEN_PROGRAM_ID, getAssociatedTokenAddress } from "@solana/spl-token";
 import { useStepStakingProgram, STEP_STAKING_TOKEN_MINT, STEP_STAKING_XTOKEN_MINT } from "./step-staking-exports";
@@ -12,7 +12,7 @@ export function useStepStakingBalance() {
   const wallet = useWallet();
   const { connection } = useConnection();
 
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: [
       'step-finance',
       'balance',
@@ -41,6 +41,7 @@ export function useStepStakeOperation() {
       'stake-operation'
     ],
     mutationFn: async (amount: number) => {
+      toast.loading('Approve transactions from your wallet')
       const walletTokenAccount = await getAssociatedTokenAddress(
         STEP_STAKING_TOKEN_MINT,
         provider.wallet.publicKey,
@@ -88,6 +89,7 @@ export function useStepUnstakeOperation() {
       'unstake-operation'
     ],
     mutationFn: async (amount: number) => {
+      toast.loading('Approve transactions from your wallet')
       const walletTokenAccount = await getAssociatedTokenAddress(
         STEP_STAKING_TOKEN_MINT,
         provider.wallet.publicKey,
@@ -136,7 +138,7 @@ export function useStepPrice() {
       program.programId
   )
 
-  const query = useQuery({
+  const query = useSuspenseQuery({
     queryKey: ['step-finance', 'emit-price'],
     queryFn: async () => {
       const price = await program.simulate.emitPrice({

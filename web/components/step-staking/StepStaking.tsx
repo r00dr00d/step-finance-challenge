@@ -22,14 +22,14 @@ export function StepStaking() {
   const marketPrices = marketPricesReq?.data ?? { step: 0, xStep: 0 };
 
   const [operation, setOperation] = useState<'stake' | 'unstake'>('stake');
-  const [input, setInput] = useState<{ type: 'step' | 'xstep', qty: number }>({ type: 'step', qty: 0 });
+  const [input, setInput] = useState<{ type: 'step' | 'xstep', qty: number; str: string }>({ type: 'step', qty: 0, str: '' });
 
-  const [error, errorLabel] = operation === 'stake'
-    ? validateStakeAmount(input, price, balance?.data?.step?.uiAmount)
-    : validateUnstakeAmount(input, price, balance?.data?.step?.uiAmount);
+  const { mutateAsync: stake, isPending: stakePending } = useStepStakeOperation();
+  const { mutateAsync: unstake, isPending: unstakePending } = useStepUnstakeOperation();
 
-  const { mutateAsync: stake } = useStepStakeOperation();
-  const { mutateAsync: unstake } = useStepUnstakeOperation();
+  const [disabled, buttonLabel] = operation === 'stake'
+    ? validateStakeAmount(input, price, balance?.data?.step?.uiAmount, stakePending)
+    : validateUnstakeAmount(input, price, balance?.data?.xStep?.uiAmount, unstakePending);
 
   return (
     <div className='flex flex-col gap-3'>
@@ -42,13 +42,12 @@ export function StepStaking() {
           {operation === 'stake' ? <StakeComponent marketPrices={marketPrices} price={price} stepUiBalance={balance?.data?.step?.uiAmount} xStepUiBalance={balance?.data?.xStep?.uiAmount} input={input} onInputUpdate={setInput} /> : <UnstakeComponent marketPrices={marketPrices} price={price} stepUiBalance={balance?.data?.step?.uiAmount} xStepUiBalance={balance?.data?.xStep?.uiAmount} input={input} onInputUpdate={setInput} />}
         </div>
       </div>
-
       <button
-        disabled={error}
+        disabled={disabled}
         className="w-[450px] h-[60px] font-extrabold transition-colors duration-300 rounded-md text-[#06d6a0] bg-[#003628] hover:text-black hover:bg-[#06d6a0] disabled:bg-[#434343] disabled:text-[#b2b2b2] disabled:cursor-not-allowed"
         onClick={() => operation === 'stake' ? stake(input.qty * UI_AMOUNT_TO_AMOUNT_QTY) : unstake(input.qty * UI_AMOUNT_TO_AMOUNT_QTY)}
       >
-        {error ? errorLabel : operation}
+        {buttonLabel ? buttonLabel : operation}
       </button>
     </div>
   )

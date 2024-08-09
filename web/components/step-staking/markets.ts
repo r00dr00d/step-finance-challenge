@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { STEP_STAKING_TOKEN_MINT, STEP_STAKING_XTOKEN_MINT } from "./step-staking-exports";
 
 export function useMarketPrices() {
-  return useQuery<{ step: number; xStep: number }>({
+  return useSuspenseQuery<{ step: number; xStep: number }>({
     queryKey: ['step-finance', 'market-prices'],
     queryFn: async () => {
       const res = await fetch('/api/markets/prices')
