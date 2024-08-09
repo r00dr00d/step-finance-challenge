@@ -13,10 +13,7 @@ import { StakeIcon, UnstakeIcon } from '../ui/icons';
 import { UnstakeComponent } from './UnstakeComponent';
 import { useMarketPrices } from './markets';
 
-
-
-
-export function StepStakingComponent() {
+export function StepStaking() {
   const priceReq = useStepPrice();
   const marketPricesReq = useMarketPrices();
   const balance = useStepStakingBalance();

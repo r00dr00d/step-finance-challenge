@@ -23,7 +23,7 @@ export const StakeComponent = ({ price, marketPrices, stepUiBalance, xStepUiBala
       <div className="flex justify-between items-center text-sm">
         <span className="text-[white]">You stake</span>
         <div className='flex gap-2 items-center'>
-          <span className="text-[#7d7d7d] font-mono">Balance:{stepUiBalance}</span>
+          <span className="text-[#7d7d7d]">Balance: <span className='font-mono'>{stepUiBalance}</span></span>
           <button className='text-xs p-1 transition-color duration-300 hover:text-black hover:bg-[#06d6a0] text-[#06d6a0] bg-[#003628] rounded-md uppercase' onClick={() => onInputUpdate({ type: 'step', qty: stepUiBalance / 2 })}>Half</button>
           <button className='text-xs p-1 transition-color duration-300 hover:text-black hover:bg-[#06d6a0] text-[#06d6a0] bg-[#003628] rounded-md uppercase' onClick={() => onInputUpdate({ type: 'step', qty: stepUiBalance })}>Max</button>
         </div>
@@ -44,7 +44,7 @@ export const StakeComponent = ({ price, marketPrices, stepUiBalance, xStepUiBala
       <div className="flex justify-between items-center text-sm">
         <span className="text-[white]">You receive</span>
         <div className='flex gap-2 items-center'>
-          <span className="text-[#7d7d7d] font-mono">Balance: {xStepUiBalance}</span>
+          <span className="text-[#7d7d7d]">Balance: <span className='font-mono'>{xStepUiBalance}</span></span>
         </div>
       </div>
       <div className='bg-black flex justify-between px-2 py-4 rounded-md'>

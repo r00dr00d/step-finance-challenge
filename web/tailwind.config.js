@@ -13,8 +13,8 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      mono: ['Space mono', 'monospace'],
-      sans: ['Plus Jakarta Sans', 'sans-serif'],
+      mono: ['var(--font-space-mono)', 'monospace'],
+      sans: ['var(--font-jakarta)', 'sans-serif'],
     }
   },
   plugins: [require('daisyui')],
