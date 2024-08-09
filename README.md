@@ -1,6 +1,10 @@
 # step-finance-exercise
 
-## Getting Started
+## Example
+<img width="1440" alt="Screenshot 2024-08-08 at 23 00 18" src="https://github.com/user-attachments/assets/8e9b543e-4178-4dcf-bddf-43d69d05ef11">
+<img width="1440" alt="Screenshot 2024-08-08 at 23 00 12" src="https://github.com/user-attachments/assets/e52d5989-09cc-4f52-ab03-213f5e2ed1b1">
+<img width="1440" alt="Screenshot 2024-08-08 at 22 59 57" src="https://github.com/user-attachments/assets/43973419-8cd1-47f3-ab88-68b590292816">
+
 
 ### Prerequisites
 
